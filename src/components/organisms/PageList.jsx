@@ -8,11 +8,40 @@ import Box from '@mui/material/Box';
 
 // Components
 import RadioFilter from '../molecules/RadioFilter';
+import SelectFilter from '../molecules/SelectFilter';
 
-const PageList = ({ title, list, ItemComponent, isLoading }) => {
+// Constants
+import { STATUS_LIST, SORT_OPTIONS } from '../../constants/pullRequest';
+
+const PageList = ({
+  list,
+  ItemComponent,
+  isLoading,
+  onChangeStatus,
+  onChangeSort,
+  status,
+  selectedSort,
+}) => {
   return (
     <Card sx={{ minWidth: 275 }}>
-      <RadioFilter />
+      <Box
+        px="20px"
+        py="10px"
+        sx={{ display: 'flex', justifyContent: 'space-between' }}
+      >
+        <RadioFilter
+          name="Status"
+          filterOptions={STATUS_LIST}
+          onChange={onChangeStatus}
+          currentValue={status}
+        />
+        <SelectFilter
+          name="Sort"
+          filterOptions={SORT_OPTIONS}
+          onChange={onChangeSort}
+          currentValue={selectedSort}
+        />
+      </Box>
       <CardContent>
         {isLoading ? (
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>

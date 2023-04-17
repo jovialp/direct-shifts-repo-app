@@ -11,11 +11,16 @@ import getPullRequestListService from '../../services/pullRequest/getList';
 
 const Dashboard = () => {
   const [pullRequests, setPullRequests] = useState([]);
+  const [totalPageCount, setTotalPageCount] = useState(1);
 
   const getPRList = async () => {
-    const list = await getPullRequestListService({ perPage: 5 });
-    console.log('list 3', list);
-    setPullRequests(list?.[0]);
+    const { list, t } = await getPullRequestListService({
+      page: 1,
+      perPage: 5,
+      totalPageCount: totalPageCount,
+    });
+    setPullRequests(list);
+    setTotalPageCount(totalPages);
   };
 
   useEffect(() => {

@@ -7,17 +7,17 @@ import Typography from '@mui/joy/Typography';
 const RadioFilter = ({
   name = 'Filter',
   onChange,
-  statusList = ['a', 'b', 'c'],
+  filterOptions = ['a', 'b', 'c'],
   currentValue = 'a',
 }) => {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-      <Typography id="segmented-controls-example" fontWeight="lg" fontSize="sm">
+      <Typography id={name} fontWeight="lg" fontSize="sm">
         {name}:
       </Typography>
       <RadioGroup
         orientation="horizontal"
-        aria-labelledby="segmented-controls-example"
+        aria-labelledby={name}
         name="name"
         value={currentValue}
         onChange={(event) => onChange(event.target.value)}
@@ -30,7 +30,7 @@ const RadioFilter = ({
           '--Radio-actionRadius': '8px',
         }}
       >
-        {statusList.map((item) => (
+        {filterOptions.map((item) => (
           <Radio
             key={item}
             color="neutral"

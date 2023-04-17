@@ -15,30 +15,47 @@ import getPullRequestListService from '../../services/pullRequest/getList';
 const PullRequests = () => {
   const [pullRequests, setPullRequests] = useState([]);
   const [page, setPage] = useState(1);
+  const [totalPageCount, setTotalPageCount] = useState(1);
   const [status, setStatus] = useState('open');
   const [isLoading, setIsLoading] = useState(true);
+  const [sort, setSort] = useState('created');
 
   const getPRList = async () => {
-    const list = await getPullRequestListService({
-      pagination: true,
+    const { list, totalPages } = await getPullRequestListService({
+      page: page,
       perPage: 20,
       status,
+      sort,
+      totalPageCount: totalPageCount,
     });
 
     setPullRequests(list);
+    setTotalPageCount(totalPages);
     setIsLoading(false);
   };
-  const changePage = (event, pageNumber) => {
+  const onChangePage = (event, pageNumber) => {
     setPage(pageNumber);
+  };
+
+  const onChangeStatus = (value) => {
+    setStatus(value);
+  };
+
+  const onChangeSort = (value) => {
+    console.log('ss->', value);
+    setSort(value);
   };
 
   useEffect(() => {
     if (pullRequests.length === 0) {
-      (async () => {
-        await getPRList();
-      })();
+      getPRList();
     }
   });
+
+  useEffect(() => {
+    setIsLoading(true);
+    getPRList();
+  }, [status, page, sort]);
 
   return (
     <Container fixed>
@@ -56,20 +73,24 @@ const PullRequests = () => {
 
         <Grid item xs={12}>
           <PageList
-            list={pullRequests[page - 1]}
+            list={pullRequests}
             ItemComponent={PullRequest}
             isLoading={isLoading}
+            onChangeStatus={onChangeStatus}
+            status={status}
+            onChangeSort={onChangeSort}
+            selectedSort={sort}
           />
         </Grid>
 
         <Grid item xs={12}>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Pagination
-              count={pullRequests.length}
+              count={totalPageCount}
               hidePrevButton
               hideNextButton
               page={page}
-              onChange={changePage}
+              onChange={onChangePage}
             />
           </Box>
         </Grid>
