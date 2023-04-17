@@ -10,21 +10,23 @@ const Dashboard = () => {
   const [pullRequests, setPullRequests] = useState([]);
 
   const getPRList = async () => {
+    console.log('3-->', pullRequests);
     const list = await getPullRequestListService();
+    console.log('list 3', list);
     setPullRequests(list);
   };
 
   useEffect(() => {
     if (pullRequests.length === 0) {
+      console.log('2-->', pullRequests);
       (async () => {
-        getPRList();
+        await getPRList();
       })();
     }
-  }, []);
-
+  });
   return (
     <div>
-      <PullRequests data={pullRequests} />
+      <PullRequests list={pullRequests} />
       {/* <Issues data={[]} /> */}
     </div>
   );

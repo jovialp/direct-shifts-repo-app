@@ -1,38 +1,31 @@
 // Constants
-import { TOKEN, OWNER, REPO } from '../../constants/gitObj';
+import GIT_OBJ from '../../constants/gitObj';
 
 // Service
 import octokit from '../octokit/init';
 
-const getList = async () => {
+const getList = async ({ page }) => {
+  console.log('hi', 2);
   let list = [];
 
-  console.log('hi', 2);
   try {
-    // const response = await octokit.request('GET /repos/{owner}/{repo}/pulls', {
-    //   owner: OWNER,
-    //   repo: REPO,
-    //   headers: {
-    //     'X-GitHub-Api-Version': '2022-11-28',
-    //   },
-    // });
+    const response = await octokit.request(
+      `GET /repos/${GIT_OBJ.OWNER}/${GIT_OBJ.REPO}/pulls?${
+        page ? 'page' + page : ''
+      }`,
+      {
+        owner: GIT_OBJ.OWNER,
+        repo: GIT_OBJ.REPO,
+        headers: {
+          'X-GitHub-Api-Version': '2022-11-28',
+        },
+      }
+    );
+
+    list = response?.data || [];
   } catch (err) {
-    console.log('GET PR LIST - octokit => ');
+    console.log('GET PR LIST - octokit => ', err);
   }
-  fetch(`https://api.github.com/repos/${OWNER}/${REPO}/pulls`, {
-    headers: {
-      Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${TOKEN}`,
-      'X-GitHub-Api-Version': '2022-11-28',
-    },
-  })
-    .then((resp) => resp.json())
-    .then((json) => {
-      console.log(JSON.stringify(json));
-    })
-    .catch((err) => {
-      console.log('GET PR LIST', err);
-    });
 
   return list;
 };
