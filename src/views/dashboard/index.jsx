@@ -15,12 +15,12 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      if (pullRequests.length === 0) {
+    if (pullRequests.length === 0) {
+      (async () => {
         getPRList();
-      }
-    })();
-  });
+      })();
+    }
+  }, []);
 
   return (
     <div>
