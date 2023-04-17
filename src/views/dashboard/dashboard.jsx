@@ -13,9 +13,9 @@ const Dashboard = () => {
   const [pullRequests, setPullRequests] = useState([]);
 
   const getPRList = async () => {
-    const list = await getPullRequestListService({ page: 1, perPage: 5 });
+    const list = await getPullRequestListService({ perPage: 5 });
     console.log('list 3', list);
-    setPullRequests(list);
+    setPullRequests(list?.[0]);
   };
 
   useEffect(() => {

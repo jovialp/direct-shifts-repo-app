@@ -5,12 +5,18 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
+import Link from '@mui/material/Link';
 
 const DashBoardList = ({ title, list, ItemComponent, viewAllLink }) => {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography variant={'h5'} color="text.secondary" gutterBottom>
+        <Typography
+          variant={'h5'}
+          color="text.secondary"
+          alignCenter
+          gutterBottom
+        >
           {title}
         </Typography>
         <List>
@@ -19,7 +25,11 @@ const DashBoardList = ({ title, list, ItemComponent, viewAllLink }) => {
         </List>
       </CardContent>
       <CardActions>
-        <Button size="small">View All</Button>
+        <Typography align="center">
+          <Link href={viewAllLink}>
+            <Button size="small">View All</Button>
+          </Link>
+        </Typography>
       </CardActions>
     </Card>
   );
