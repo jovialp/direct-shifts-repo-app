@@ -6,18 +6,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 
-// Molecules
-import PullRequest from '../molecules/PullRequest';
-
-const PullRequests = ({ list }) => {
+const DashBoardList = ({ title, list, ItemComponent, viewAllLink }) => {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography variant={'h5'} color="text.secondary" gutterBottom>
-          Pull Requests
+          {title}
         </Typography>
         <List>
-          {list?.length > 0 && list.map((pr,i) => <PullRequest key={} data={pr} />)}
+          {list?.length > 0 &&
+            list.map((pr, i) => <ItemComponent key={i} data={pr} />)}
         </List>
       </CardContent>
       <CardActions>
@@ -26,4 +24,4 @@ const PullRequests = ({ list }) => {
     </Card>
   );
 };
-export default PullRequests;
+export default DashBoardList;

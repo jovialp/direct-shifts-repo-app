@@ -3,17 +3,23 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/Inbox';
+
+// Icon
+import PullRequestIcon from '../atoms/icons/PullRequestIcon';
 
 const PullRequest = ({ data }) => {
+  const { title, number, user } = data;
+  // console.log(data);
   return (
     <ListItem disablePadding>
       <ListItemButton>
         <ListItemIcon>
-          <InboxIcon />
+          <PullRequestIcon fillColor="#3fb950" />
         </ListItemIcon>
-        <ListItemText primary="Inbox" />
-        aadsfs
+        <ListItemText
+          primary={title}
+          secondary={`#${number} opened by ${user.login}`}
+        />
       </ListItemButton>
     </ListItem>
   );

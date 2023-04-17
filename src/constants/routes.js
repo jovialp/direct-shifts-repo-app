@@ -2,7 +2,8 @@ import React from 'react';
 
 // Pages
 import App from '../App';
-import Dashboard from '../views/dashboard';
+import Dashboard from '../views/dashboard/dashboard';
+import PullRequests from '../views/pull-request/list';
 
 const ROUTES = [
   // {
@@ -12,6 +13,11 @@ const ROUTES = [
   {
     path: '/',
     element: <Dashboard />,
+  },
+
+  {
+    path: '/pull-requests',
+    element: <PullRequests />,
   },
 ];
 

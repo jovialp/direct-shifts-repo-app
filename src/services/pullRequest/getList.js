@@ -4,14 +4,16 @@ import GIT_OBJ from '../../constants/gitObj';
 // Service
 import octokit from '../octokit/init';
 
-const getList = async ({ page }) => {
-  console.log('hi', 2);
+const getList = async ({ page = 1, perPage = 5 }) => {
   let list = [];
+  const params = { page: page, per_page: perPage };
+
+  const paramsToUrlString = new URLSearchParams(params).toString();
 
   try {
     const response = await octokit.request(
       `GET /repos/${GIT_OBJ.OWNER}/${GIT_OBJ.REPO}/pulls?${
-        page ? 'page' + page : ''
+        paramsToUrlString ? paramsToUrlString : ''
       }`,
       {
         owner: GIT_OBJ.OWNER,
