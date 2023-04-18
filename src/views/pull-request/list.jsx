@@ -3,11 +3,11 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 // Components
 import PageList from '../../components/organisms/PageList.jsx';
 import PullRequest from '../../components/molecules/PullRequest';
+import PageTitle from '../../components/atoms/PageTitle';
 
 // Services
 import getPullRequestListService from '../../services/pullRequest/getList';
@@ -42,7 +42,6 @@ const PullRequests = () => {
   };
 
   const onChangeSort = (value) => {
-    console.log('ss->', value);
     setSort(value);
   };
 
@@ -61,14 +60,7 @@ const PullRequests = () => {
     <Container fixed>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography
-            variant={'h5'}
-            color="text.secondary"
-            alignCenter
-            gutterBottom
-          >
-            Pull Requests
-          </Typography>
+          <PageTitle title={'Pull Requests'} />
         </Grid>
 
         <Grid item xs={12}>

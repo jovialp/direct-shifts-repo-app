@@ -4,6 +4,7 @@ import React from 'react';
 import App from '../App';
 import Dashboard from '../views/dashboard/dashboard';
 import PullRequests from '../views/pull-request/list';
+import PullRequestDetails from '../views/pull-request/details';
 
 const ROUTES = [
   // {
@@ -18,6 +19,11 @@ const ROUTES = [
   {
     path: '/pull-requests',
     element: <PullRequests />,
+  },
+
+  {
+    path: '/pull-request/:number',
+    element: <PullRequestDetails />,
   },
 ];
 
