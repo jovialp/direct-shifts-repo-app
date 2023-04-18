@@ -12,11 +12,15 @@ import PageTitle from '../../components/atoms/PageTitle';
 // Services
 import getPullRequestListService from '../../services/pullRequest/getList';
 
-const PullRequests = () => {
-  const [pullRequests, setPullRequests] = useState([]);
+const Issues = () => {
+  const [issues, setIssues] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPageCount, setTotalPageCount] = useState(1);
+  const [status, setStatus] = useState('open');
   const [isLoading, setIsLoading] = useState(true);
+  const [sort, setSort] = useState('created');
 
-  const getPRList = async () => {
+  const getIssueList = async () => {
     const { list, totalPages } = await getPullRequestListService({
       page: page,
       perPage: 20,
@@ -25,7 +29,7 @@ const PullRequests = () => {
       totalPageCount: totalPageCount,
     });
 
-    setPullRequests(list);
+    setIssues(list);
     setTotalPageCount(totalPages);
     setIsLoading(false);
   };
@@ -42,21 +46,26 @@ const PullRequests = () => {
   };
 
   useEffect(() => {
-    if (pullRequests.length === 0) {
-      getPRList();
+    if (issues.length === 0) {
+      getIssueList();
     }
   });
+
+  useEffect(() => {
+    setIsLoading(true);
+    getIssueList();
+  }, [status, page, sort]);
 
   return (
     <Container fixed>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <PageTitle title={'Pull Request #'+ number} />
+          <PageTitle title={'Issues'} />
         </Grid>
 
         <Grid item xs={12}>
           <PageList
-            list={pullRequests}
+            list={issues}
             ItemComponent={PullRequest}
             isLoading={isLoading}
             onChangeStatus={onChangeStatus}
@@ -72,7 +81,7 @@ const PullRequests = () => {
               count={totalPageCount}
               hidePrevButton
               hideNextButton
-              page={page}
+              page={Number(page)}
               onChange={onChangePage}
             />
           </Box>
@@ -81,4 +90,4 @@ const PullRequests = () => {
     </Container>
   );
 };
-export default PullRequests;
+export default Issues;
