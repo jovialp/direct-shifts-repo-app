@@ -8,6 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Card from '@mui/joy/Card';
+import CardOverflow from '@mui/joy/CardOverflow';
 
 const IssueCommentsList = ({ comments = [] }) => {
   return (
