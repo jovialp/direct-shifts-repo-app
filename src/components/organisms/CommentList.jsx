@@ -8,7 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-const CommentList = ({ comments = [1, 2] }) => {
+const CommentList = ({ comments = [] }) => {
   return (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
       {comments.map((comment, i) => {

@@ -81,7 +81,7 @@ const PullRequests = () => {
               count={totalPageCount}
               hidePrevButton
               hideNextButton
-              page={page}
+              page={Number(page)}
               onChange={onChangePage}
             />
           </Box>

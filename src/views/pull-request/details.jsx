@@ -12,7 +12,8 @@ import UserAvatar from '../../components/atoms/UserAvatar';
 
 // Services
 import getPullRequestDetailService from '../../services/pullRequest/getDetails';
-import getCommentListService from '../../services/pullRequest/getComentList';
+import getCommentListService from '../../services/pullRequest/getCommentList';
+import getCommitListService from '../../services/pullRequest/getCommitList';
 
 const PullRequestDetails = (props) => {
   const [pullRequestDetails, setPullRequestDetails] = useState();
@@ -50,6 +51,24 @@ const PullRequestDetails = (props) => {
     setIsLoading(false);
   };
 
+  const getCommitList = async () => {
+    const { list } = await getCommitListService({
+      issueNumber: pullRequestNumber,
+    });
+
+    setCommits(
+      list.map((item) => {
+        return {
+          userName: item.author.login,
+          userAvatarUrl: item.author.avatar_url,
+          message: item.commit.message,
+          updatedAt: item.commit.author.date,
+        };
+      })
+    );
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     if (!pullRequestDetails) {
       getPRDetails();
@@ -57,15 +76,15 @@ const PullRequestDetails = (props) => {
     if (comments.length === 0) {
       getCommentList();
     }
-  });
 
-  const Sample = ({ text = 'h' }) => {
-    return <div>Hi,{text}</div>;
-  };
+    if (commits.length === 0) {
+      getCommitList();
+    }
+  });
 
   const panelContentComponentList = [
     <CommentList comments={comments} />,
-    <CommitTimeline />,
+    <CommitTimeline commitList={commits} />,
   ];
 
   return (
