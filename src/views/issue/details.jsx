@@ -5,10 +5,7 @@ import Grid from '@mui/material/Grid';
 
 // Components
 import PullRequestHeader from '../../components/organisms/PullRequestHeader';
-import TabSection from '../../components/organisms/TabSection';
-import CommentList from '../../components/organisms/CommentList';
-import CommitTimeline from '../../components/organisms/CommitTimeline';
-import UserAvatar from '../../components/atoms/UserAvatar';
+import IssueCommentsList from '../../components/organisms/IssueCommentsList';
 
 // Services
 import getPullRequestDetailService from '../../services/pullRequest/getDetails';
@@ -17,7 +14,6 @@ import getCommentListService from '../../services/pullRequest/getCommentList';
 const IssueDetails = () => {
   const [pullRequestDetails, setPullRequestDetails] = useState();
   const [comments, setComments] = useState([]);
-  const [commits, setCommits] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const params = useParams();
@@ -50,24 +46,6 @@ const IssueDetails = () => {
     setIsLoading(false);
   };
 
-  const getCommitList = async () => {
-    const { list } = await getCommitListService({
-      issueNumber: pullRequestNumber,
-    });
-
-    setCommits(
-      list.map((item) => {
-        return {
-          userName: item.author.login,
-          userAvatarUrl: item.author.avatar_url,
-          message: item.commit.message,
-          updatedAt: item.commit.author.date,
-        };
-      })
-    );
-    setIsLoading(false);
-  };
-
   useEffect(() => {
     if (!pullRequestDetails) {
       getPRDetails();
@@ -75,16 +53,7 @@ const IssueDetails = () => {
     if (comments.length === 0) {
       getCommentList();
     }
-
-    if (commits.length === 0) {
-      getCommitList();
-    }
   });
-
-  const panelContentComponentList = [
-    <CommentList comments={comments} />,
-    <CommitTimeline commitList={commits} />,
-  ];
 
   return (
     <Container fixed>
@@ -101,7 +70,7 @@ const IssueDetails = () => {
         />
 
         <Grid item xs={12} md={8}>
-          <CommentList comments={comments} />,
+          <IssueCommentsList comments={comments} />,
         </Grid>
       </Grid>
     </Container>
