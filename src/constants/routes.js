@@ -5,7 +5,7 @@ import App from '../App';
 import Dashboard from '../views/dashboard/dashboard';
 import PullRequests from '../views/pull-request/list';
 import PullRequestDetails from '../views/pull-request/details';
-import Issues from '../views/issues/list';
+import Issues from '../views/issue/list';
 
 const ROUTES = [
   // {
