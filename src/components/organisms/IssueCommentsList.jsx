@@ -10,58 +10,49 @@ import Box from '@mui/material/Box';
 import Card from '@mui/joy/Card';
 import CardOverflow from '@mui/joy/CardOverflow';
 
+// Components
+import UserAvatar from '../atoms/UserAvatar';
+
 const IssueCommentsList = ({ comments = [] }) => {
   return (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
       {comments.map((comment, i) => {
         return (
-          <Card variant="outlined">
+          <Card variant="outlined" sx={{ marginBottom: '10px' }}>
             <CardOverflow
               variant="soft"
               sx={{
                 display: 'flex',
-                gap: 1.5,
+                justifyContent: 'space-between',
+                alignContent: 'center',
+                // gap: 1.5,
                 py: 1.5,
                 px: 'var(--Card-padding)',
                 bgcolor: 'background.level1',
               }}
             >
               <Typography
-                level="body3"
-                sx={{ fontWeight: 'md', color: 'text.secondary' }}
+                sx={{ display: 'inline' }}
+                component="span"
+                variant="body2"
+                color="text.primary"
               >
-                6.3k views
+                <UserAvatar
+                  name={comment.userName}
+                  avatarUrl={comment.userAvatarUrl}
+                />
               </Typography>
+
               <Divider orientation="vertical" />
               <Typography
                 level="body3"
                 sx={{ fontWeight: 'md', color: 'text.secondary' }}
               >
-                1 hour ago
+                {new Date(comment.updatedAt).toLocaleString()}
               </Typography>
             </CardOverflow>
             <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar alt={comment.userName} src={comment.userAvatarUrl} />
-              </ListItemAvatar>
-              <ListItemText
-                primary={comment.commentText}
-                secondary={
-                  <Box
-                    sx={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
-                    <Typography
-                      sx={{ display: 'inline' }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      {comment.userName}
-                    </Typography>
-                    {new Date(comment.updatedAt).toLocaleString()}
-                  </Box>
-                }
-              />
+              <ListItemText primary={comment.commentText} />
             </ListItem>
           </Card>
         );

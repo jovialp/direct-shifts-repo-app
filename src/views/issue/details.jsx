@@ -8,20 +8,20 @@ import PullRequestHeader from '../../components/organisms/PullRequestHeader';
 import IssueCommentsList from '../../components/organisms/IssueCommentsList';
 
 // Services
-import getPullRequestDetailService from '../../services/pullRequest/getDetails';
+import getIssueDetailService from '../../services/pullRequest/getDetails';
 import getCommentListService from '../../services/pullRequest/getCommentList';
 
 const IssueDetails = () => {
-  const [pullRequestDetails, setPullRequestDetails] = useState();
+  const [issueDetails, setIssueDetails] = useState();
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const params = useParams();
-  const pullRequestNumber = params.number;
+  const issueNumber = params.number;
 
   const getPRDetails = async () => {
-    const details = await getPullRequestDetailService({
-      number: pullRequestNumber,
+    const details = await getIssueDetailService({
+      number: issueNumber,
     });
 
     setPullRequestDetails(details);
@@ -30,7 +30,7 @@ const IssueDetails = () => {
 
   const getCommentList = async () => {
     const { list } = await getCommentListService({
-      issueNumber: pullRequestNumber,
+      issueNumber: issueNumber,
     });
 
     setComments(
@@ -47,7 +47,7 @@ const IssueDetails = () => {
   };
 
   useEffect(() => {
-    if (!pullRequestDetails) {
+    if (!issueDetails) {
       getPRDetails();
     }
     if (comments.length === 0) {
@@ -59,14 +59,14 @@ const IssueDetails = () => {
     <Container fixed>
       <Grid container spacing={2}>
         <PullRequestHeader
-          pullRequestNumber={pullRequestNumber}
-          title={pullRequestDetails?.title}
-          status={pullRequestDetails?.state}
-          userName={pullRequestDetails?.user?.login}
-          avatarUrl={pullRequestDetails?.user?.avatar_url}
-          commitCount={pullRequestDetails?.commits}
-          headBranchName={pullRequestDetails?.head?.label}
-          baseBranchName={pullRequestDetails?.base?.label}
+          pullRequestNumber={issueNumber}
+          title={issueDetails?.title}
+          status={issueDetails?.state}
+          userName={issueDetails?.user?.login}
+          avatarUrl={issueDetails?.user?.avatar_url}
+          commitCount={issueDetails?.commits}
+          headBranchName={issueDetails?.head?.label}
+          baseBranchName={issueDetails?.base?.label}
         />
 
         <Grid item xs={12} md={8}>
