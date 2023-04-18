@@ -10,7 +10,7 @@ import PullRequest from '../../components/molecules/PullRequest';
 import PageTitle from '../../components/atoms/PageTitle';
 
 // Services
-import getPullRequestListService from '../../services/pullRequest/getList';
+import getIssuesListService from '../../services/issue/getList';
 
 const Issues = () => {
   const [issues, setIssues] = useState([]);
@@ -21,7 +21,7 @@ const Issues = () => {
   const [sort, setSort] = useState('created');
 
   const getIssueList = async () => {
-    const { list, totalPages } = await getPullRequestListService({
+    const { list, totalPages } = await getIssuesListService({
       page: page,
       perPage: 20,
       status,
@@ -78,7 +78,7 @@ const Issues = () => {
         <Grid item xs={12}>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Pagination
-              count={totalPageCount}
+              count={Number(totalPageCount)}
               hidePrevButton
               hideNextButton
               page={Number(page)}

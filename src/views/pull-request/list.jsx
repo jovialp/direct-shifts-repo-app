@@ -78,7 +78,7 @@ const PullRequests = () => {
         <Grid item xs={12}>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Pagination
-              count={totalPageCount}
+              count={Number(totalPageCount)}
               hidePrevButton
               hideNextButton
               page={Number(page)}
