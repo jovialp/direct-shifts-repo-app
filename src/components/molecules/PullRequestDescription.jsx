@@ -2,8 +2,8 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 
 // Components
-import UserAvatar from '../components/atoms/UserAvatar';
-import BranchName from '../components/atoms/BranchName';
+import UserAvatar from '../atoms/UserAvatar';
+import BranchName from '../atoms/BranchName';
 
 const PullRequestDescription = ({
   userName,
@@ -13,7 +13,7 @@ const PullRequestDescription = ({
   baseBranchName,
 }) => {
   return (
-    <Typography variant="subtitle2" gutterBottom>
+    <Typography variant="subtitle2" gutterBottom sx={{ lineHeight: 2.5 }}>
       <UserAvatar name={userName} avatarUrl={avatarUrl} /> wants to merge{' '}
       {commitCount} commits into <BranchName name={baseBranchName} /> from{' '}
       <BranchName name={headBranchName} />

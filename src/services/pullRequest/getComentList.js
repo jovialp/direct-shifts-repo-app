@@ -4,11 +4,12 @@ import GIT_OBJ from '../../constants/gitObj';
 // Service
 import octokit from '../octokit/init';
 
-const getDetails = async ({ number = 1 }) => {
-  let details;
+const getList = async ({ issueNumber = 1 }) => {
+  let list = [];
+
   try {
     const response = await octokit.request(
-      `GET /repos/${GIT_OBJ.OWNER}/${GIT_OBJ.REPO}/pulls/${number}`,
+      `GET /repos/${GIT_OBJ.OWNER}/${GIT_OBJ.REPO}/pulls/${issueNumber}/comments`,
       {
         // owner: GIT_OBJ.OWNER,
         // repo: GIT_OBJ.REPO,
@@ -17,12 +18,12 @@ const getDetails = async ({ number = 1 }) => {
         },
       }
     );
-    details = response?.data || [];
+    list = response?.data || [];
   } catch (err) {
-    console.log('GET PR DETAILS - octokit => ', err);
+    console.log('GET PR LIST - octokit => ', err);
   }
 
-  return details;
+  return { list };
 };
 
-export default getDetails;
+export default getList;

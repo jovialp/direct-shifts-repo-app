@@ -8,7 +8,7 @@ const UserAvatar = ({ name, avatarUrl }) => {
       avatar={<Avatar alt={name} src={avatarUrl} />}
       label={name}
       variant="outlined"
-      sx={{ height: 'auto', padding: '2px 0px' }}
+      sx={{ height: '35px', padding: '2px 0px' }}
     />
   );
 };

@@ -2,27 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import Chip from '@mui/material/Chip';
-import Avatar from '@mui/material/Avatar';
 
 // Components
 import PullRequestHeader from '../../components/organisms/PullRequestHeader';
-import PullRequestStatus from '../../components/molecules/PullRequestStatus';
-import PageTitle from '../../components/atoms/PageTitle';
+import TabSection from '../../components/organisms/TabSection';
+import CommentList from '../../components/organisms/CommentList';
+import CommitTimeline from '../../components/organisms/CommitTimeline';
+import UserAvatar from '../../components/atoms/UserAvatar';
 
 // Services
-import getPullRequestListService from '../../services/pullRequest/getDetails';
+import getPullRequestDetailService from '../../services/pullRequest/getDetails';
+import getCommentListService from '../../services/pullRequest/getComentList';
 
 const PullRequestDetails = (props) => {
   const [pullRequestDetails, setPullRequestDetails] = useState();
+  const [comments, setComments] = useState([]);
+  const [commits, setCommits] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const params = useParams();
   const pullRequestNumber = params.number;
 
-  const getPRList = async () => {
-    const details = await getPullRequestListService({
+  const getPRDetails = async () => {
+    const details = await getPullRequestDetailService({
       number: pullRequestNumber,
     });
 
@@ -30,11 +32,41 @@ const PullRequestDetails = (props) => {
     setIsLoading(false);
   };
 
+  const getCommentList = async () => {
+    const { list } = await getCommentListService({
+      issueNumber: pullRequestNumber,
+    });
+
+    setComments(
+      list.map((item) => {
+        return {
+          userName: item.user.login,
+          userAvatarUrl: item.user.avatar_url,
+          commentText: item.body,
+          updatedAt: item.updated_at,
+        };
+      })
+    );
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     if (!pullRequestDetails) {
-      getPRList();
+      getPRDetails();
+    }
+    if (comments.length === 0) {
+      getCommentList();
     }
   });
+
+  const Sample = ({ text = 'h' }) => {
+    return <div>Hi,{text}</div>;
+  };
+
+  const panelContentComponentList = [
+    <CommentList comments={comments} />,
+    <CommitTimeline />,
+  ];
 
   return (
     <Container fixed>
@@ -49,36 +81,20 @@ const PullRequestDetails = (props) => {
           headBranchName={pullRequestDetails?.head?.label}
           baseBranchName={pullRequestDetails?.base?.label}
         />
-        <Grid item xs={12}>
-          <Typography variant="subtitle2" gutterBottom>
-            Pull Request #{pullRequestNumber}
-          </Typography>
-          <PageTitle title={pullRequestDetails?.title} />
-          <PullRequestStatus status={pullRequestDetails?.state} />
-          <Typography variant="subtitle2" gutterBottom>
-            <Chip
-              avatar={
-                <Avatar
-                  alt={pullRequestDetails?.user?.login}
-                  src={pullRequestDetails?.user?.avatar_url}
-                />
-              }
-              label={pullRequestDetails?.user?.login}
-              variant="outlined"
-              sx={{ height: 'auto', padding: '2px 0px' }}
-            />{' '}
-            wants to merge {pullRequestDetails?.commits} commits into{' '}
-            <Chip
-              label={pullRequestDetails?.base?.label}
-              sx={{ height: 'auto', padding: '2px 0px' }}
-            />{' '}
-            from <Chip label={pullRequestDetails?.head?.label} />
-          </Typography>
+
+        <Grid item xs={12} md={8}>
+          <TabSection
+            tabList={['Comments', 'Commits']}
+            tabPannelContentList={panelContentComponentList}
+          />
         </Grid>
 
-        <Grid item xs={12}></Grid>
-
-        <Grid item xs={12}></Grid>
+        <Grid item xs={12} md={4}>
+          Reviewer:{' '}
+          {pullRequestDetails?.requested_reviewers?.map((user) => (
+            <UserAvatar name={user.login} avatarUrl={user.avatar_url} />
+          ))}
+        </Grid>
       </Grid>
     </Container>
   );

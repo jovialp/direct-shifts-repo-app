@@ -1,10 +1,11 @@
 import React from 'react';
+import Grid from '@mui/material/Grid';
 
 // Components
-import TitleNumber from '../components/atoms/TitleNumber';
-import PageTitle from '../components/atoms/PageTitle';
-import PullRequestStatus from '../components/molecules/PullRequestStatus';
-import PullRequestDescription from '../components/molecules/PullRequestDescription';
+import TitleNumber from '../atoms/TitleNumber';
+import PageTitle from '../atoms/PageTitle';
+import PullRequestStatus from '../molecules/PullRequestStatus';
+import PullRequestDescription from '../molecules/PullRequestDescription';
 
 const PullRequestHeader = ({
   pullRequestNumber,
@@ -16,7 +17,6 @@ const PullRequestHeader = ({
   headBranchName,
   baseBranchName,
 }) => {
-  console.log('ahha');
   return (
     <Grid item xs={12}>
       <TitleNumber title=" Pull Request" number={pullRequestNumber} />
