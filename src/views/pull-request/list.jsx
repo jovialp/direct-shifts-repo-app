@@ -9,6 +9,9 @@ import PageList from '../../components/organisms/PageList.jsx';
 import PullRequest from '../../components/molecules/PullRequest';
 import PageTitle from '../../components/atoms/PageTitle';
 
+// Constants
+import { STATUS_LIST, SORT_OPTIONS } from '../../constants/pullRequest';
+
 // Services
 import getPullRequestListService from '../../services/pullRequest/getList';
 
@@ -72,6 +75,8 @@ const PullRequests = () => {
             status={status}
             onChangeSort={onChangeSort}
             selectedSort={sort}
+            statusList={STATUS_LIST}
+            sortOptions={SORT_OPTIONS}
           />
         </Grid>
 

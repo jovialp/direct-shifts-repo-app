@@ -6,6 +6,7 @@ import Dashboard from '../views/dashboard/dashboard';
 import PullRequests from '../views/pull-request/list';
 import PullRequestDetails from '../views/pull-request/details';
 import Issues from '../views/issue/list';
+import IssueDetails from '../views/issue/details';
 
 const ROUTES = [
   // {
@@ -21,7 +22,6 @@ const ROUTES = [
     path: '/pull-requests',
     element: <PullRequests />,
   },
-
   {
     path: '/pull-request/:number',
     element: <PullRequestDetails />,
@@ -30,6 +30,10 @@ const ROUTES = [
   {
     path: '/issues',
     element: <Issues />,
+  },
+  {
+    path: '/issue/:number',
+    element: <IssueDetails />,
   },
 ];
 

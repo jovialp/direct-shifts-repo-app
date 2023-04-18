@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 // Components
 import DashBoardList from '../../components/organisms/DashBoardList.jsx';
 import PullRequest from '../../components/molecules/PullRequest';
+import Issue from '../../components/molecules/Issue';
 import PageTitle from '../../components/atoms/PageTitle';
 
 // Services
@@ -59,7 +60,7 @@ const Dashboard = () => {
           <DashBoardList
             title={'Issues'}
             list={issues}
-            ItemComponent={PullRequest}
+            ItemComponent={Issue}
             viewAllLink="/issues"
           />
         </Grid>

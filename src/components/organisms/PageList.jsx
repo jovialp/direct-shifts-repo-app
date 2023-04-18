@@ -10,9 +10,6 @@ import Box from '@mui/material/Box';
 import RadioFilter from '../molecules/RadioFilter';
 import SelectFilter from '../molecules/SelectFilter';
 
-// Constants
-import { STATUS_LIST, SORT_OPTIONS } from '../../constants/pullRequest';
-
 const PageList = ({
   list,
   ItemComponent,
@@ -20,7 +17,9 @@ const PageList = ({
   onChangeStatus,
   onChangeSort,
   status,
+  statusList,
   selectedSort,
+  sortOptions,
 }) => {
   return (
     <Card sx={{ minWidth: 275 }}>
@@ -31,13 +30,13 @@ const PageList = ({
       >
         <RadioFilter
           name="Status"
-          filterOptions={STATUS_LIST}
+          filterOptions={statusList}
           onChange={onChangeStatus}
           currentValue={status}
         />
         <SelectFilter
           name="Sort"
-          filterOptions={SORT_OPTIONS}
+          filterOptions={sortOptions}
           onChange={onChangeSort}
           currentValue={selectedSort}
         />

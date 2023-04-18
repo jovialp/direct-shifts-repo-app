@@ -13,9 +13,8 @@ import UserAvatar from '../../components/atoms/UserAvatar';
 // Services
 import getPullRequestDetailService from '../../services/pullRequest/getDetails';
 import getCommentListService from '../../services/pullRequest/getCommentList';
-import getCommitListService from '../../services/pullRequest/getCommitList';
 
-const PullRequestDetails = () => {
+const IssueDetails = () => {
   const [pullRequestDetails, setPullRequestDetails] = useState();
   const [comments, setComments] = useState([]);
   const [commits, setCommits] = useState([]);
@@ -102,20 +101,10 @@ const PullRequestDetails = () => {
         />
 
         <Grid item xs={12} md={8}>
-          <TabSection
-            tabList={['Comments', 'Commits']}
-            tabPannelContentList={panelContentComponentList}
-          />
-        </Grid>
-
-        <Grid item xs={12} md={4}>
-          Reviewer:{' '}
-          {pullRequestDetails?.requested_reviewers?.map((user) => (
-            <UserAvatar name={user.login} avatarUrl={user.avatar_url} />
-          ))}
+          <CommentList comments={comments} />,
         </Grid>
       </Grid>
     </Container>
   );
 };
-export default PullRequestDetails;
+export default IssueDetails;

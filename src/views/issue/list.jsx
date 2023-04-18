@@ -6,8 +6,11 @@ import Box from '@mui/material/Box';
 
 // Components
 import PageList from '../../components/organisms/PageList.jsx';
-import PullRequest from '../../components/molecules/PullRequest';
+import Issue from '../../components/molecules/Issue';
 import PageTitle from '../../components/atoms/PageTitle';
+
+// Constants
+import { STATUS_LIST, SORT_OPTIONS } from '../../constants/issue';
 
 // Services
 import getIssuesListService from '../../services/issue/getList';
@@ -66,12 +69,14 @@ const Issues = () => {
         <Grid item xs={12}>
           <PageList
             list={issues}
-            ItemComponent={PullRequest}
+            ItemComponent={Issue}
             isLoading={isLoading}
             onChangeStatus={onChangeStatus}
             status={status}
             onChangeSort={onChangeSort}
             selectedSort={sort}
+            statusList={STATUS_LIST}
+            sortOptions={SORT_OPTIONS}
           />
         </Grid>
 
