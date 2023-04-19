@@ -18,7 +18,6 @@ const getDetails = async ({ number = 1 }) => {
       }
     );
     details = response?.data || [];
-    console.log('GET PR DETAILS - octokit => ', details);
   } catch (err) {
     console.log('GET PR DETAILS - octokit => ', err);
   }
