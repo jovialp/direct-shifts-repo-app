@@ -11,12 +11,7 @@ const DashBoardList = ({ title, list, ItemComponent, viewAllLink }) => {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography
-          variant={'h5'}
-          color="text.secondary"
-          alignCenter
-          gutterBottom
-        >
+        <Typography variant={'h5'} color="text.secondary" gutterBottom>
           {title}
         </Typography>
         <List>

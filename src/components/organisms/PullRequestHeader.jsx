@@ -4,8 +4,11 @@ import Grid from '@mui/material/Grid';
 // Components
 import TitleNumber from '../atoms/TitleNumber';
 import PageTitle from '../atoms/PageTitle';
-import PullRequestStatus from '../molecules/PullRequestStatus';
+import Status from '../molecules/Status';
 import PullRequestDescription from '../molecules/PullRequestDescription';
+
+// Icon
+import PullRequestIcon from '../atoms/icons/PullRequestIcon';
 
 const PullRequestHeader = ({
   pullRequestNumber,
@@ -21,7 +24,7 @@ const PullRequestHeader = ({
     <Grid item xs={12}>
       <TitleNumber title=" Pull Request" number={pullRequestNumber} />
       <PageTitle title={title} />
-      <PullRequestStatus status={status} />
+      <Status status={status} Icon={PullRequestIcon} />
       <PullRequestDescription
         userName={userName}
         avatarUrl={avatarUrl}

@@ -4,11 +4,13 @@ import Card from '@mui/joy/Card';
 import CardOverflow from '@mui/joy/CardOverflow';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import Box from '@mui/material/Box';
 
 // Components
 import UserAvatar from '../atoms/UserAvatar';
 import CodeBlock from '../atoms/CodeBlock';
+
+// Helper
+import { formatToCommentDate } from '../../lib/helper';
 
 const IssueComment = ({ comment }) => {
   return (
@@ -41,7 +43,7 @@ const IssueComment = ({ comment }) => {
           level="body3"
           sx={{ fontWeight: 'md', color: 'text.secondary' }}
         >
-          {new Date(comment.updatedAt).toLocaleString()}
+          {formatToCommentDate(comment.updatedAt).toLocaleString()}
         </Typography>
       </CardOverflow>
       {comment?.commentText?.split('```')?.map((text, i) => {

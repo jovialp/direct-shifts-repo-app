@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 
 const PageTitle = ({ title }) => {
   return (
-    <Typography variant={'h5'} color="text.secondary" alignCenter gutterBottom>
+    <Typography variant={'h5'} color="text.secondary" gutterBottom>
       {title}
     </Typography>
   );

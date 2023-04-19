@@ -8,6 +8,9 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
+// Helper
+import { formatToCommentDate } from '../../lib/helper';
+
 const CommentList = ({ comments = [] }) => {
   return (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
@@ -32,7 +35,7 @@ const CommentList = ({ comments = [] }) => {
                     >
                       {comment.userName}
                     </Typography>
-                    {new Date(comment.updatedAt).toLocaleString()}
+                    {formatToCommentDate(comment.updatedAt)}
                   </Box>
                 }
               />

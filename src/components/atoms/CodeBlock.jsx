@@ -2,7 +2,6 @@ import React from 'react';
 import Box from '@mui/material/Box';
 
 const CodeBlock = ({ text }) => {
-  console.log({ text });
   return (
     <Box
       component="div"

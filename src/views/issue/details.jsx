@@ -55,7 +55,7 @@ const IssueDetails = () => {
       getCommentList();
     }
   });
-
+  console.log(issueDetails);
   return (
     <Container fixed>
       <Grid container spacing={2}>
@@ -65,9 +65,8 @@ const IssueDetails = () => {
           status={issueDetails?.state}
           userName={issueDetails?.user?.login}
           avatarUrl={issueDetails?.user?.avatar_url}
-          commitCount={issueDetails?.commits}
-          headBranchName={issueDetails?.head?.label}
-          baseBranchName={issueDetails?.base?.label}
+          commentCount={issueDetails?.comments}
+          createdAt={issueDetails?.created_at}
         />
 
         <Grid item xs={12} md={8}>

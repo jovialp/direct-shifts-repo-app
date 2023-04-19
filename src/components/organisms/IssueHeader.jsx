@@ -4,8 +4,11 @@ import Grid from '@mui/material/Grid';
 // Components
 import TitleNumber from '../atoms/TitleNumber';
 import PageTitle from '../atoms/PageTitle';
-import PullRequestStatus from '../molecules/PullRequestStatus';
-import PullRequestDescription from '../molecules/PullRequestDescription';
+import Status from '../molecules/Status';
+import IssueDescription from '../molecules/IssueDescription';
+
+// Icon
+import IssueIcon from '../atoms/icons/IssueIcon';
 
 const IssueHeader = ({
   pullRequestNumber,
@@ -13,21 +16,19 @@ const IssueHeader = ({
   status,
   userName,
   avatarUrl,
-  commitCount,
-  headBranchName,
-  baseBranchName,
+  commentCount,
+  createdAt,
 }) => {
   return (
     <Grid item xs={12}>
-      <TitleNumber title=" Pull Request" number={pullRequestNumber} />
+      <TitleNumber title="Issue" number={pullRequestNumber} />
       <PageTitle title={title} />
-      <PullRequestStatus status={status} />
-      <PullRequestDescription
+      <Status status={status} Icon={IssueIcon} />
+      <IssueDescription
         userName={userName}
         avatarUrl={avatarUrl}
-        commitCount={commitCount}
-        headBranchName={headBranchName}
-        baseBranchName={baseBranchName}
+        commentCount={commentCount}
+        createdAt={createdAt}
       />
     </Grid>
   );

@@ -5,10 +5,7 @@ import Button from '@mui/joy/Button';
 // Constants
 import { STATUSES } from '../../constants/pullRequest';
 
-// Icon
-import PullRequestIcon from '../atoms/icons/PullRequestIcon';
-
-const PullRequestStatus = ({ status }) => {
+const PullRequestStatus = ({ status, Icon }) => {
   const renderStatus = () => {
     switch (status) {
       case STATUSES.OPEN:
@@ -21,11 +18,29 @@ const PullRequestStatus = ({ status }) => {
               cursor: 'default',
               marginBottom: '10px',
             }}
-            startDecorator={<PullRequestIcon fillColor="#fff" />}
+            startDecorator={<Icon fillColor="#fff" />}
           >
             {status}
           </Button>
         );
+      case STATUSES.CLOSED:
+        return (
+          <Button
+            color="secondary"
+            sx={{
+              bgcolor: '#a371f7',
+              borderRadius: 100,
+              cursor: 'default',
+              marginBottom: '10px',
+              color: '#fff',
+            }}
+            startDecorator={<Icon fillColor="#fff" />}
+          >
+            {status}
+          </Button>
+        );
+      default:
+        return '';
     }
   };
   return <Box sx={{ display: 'flex' }}>{renderStatus()}</Box>;
