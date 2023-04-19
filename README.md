@@ -4,11 +4,11 @@
 
 Set up your git config in src/constants/gitObj.js
 
-### ` TOKEN - your github access token
+### TOKEN - your github access token
 
 ### OWNER - the github user name that you want check
 
-### REPO - repository name of corresponding user`
+### REPO - repository name of corresponding user
 
 In the project directory, you can run:
 

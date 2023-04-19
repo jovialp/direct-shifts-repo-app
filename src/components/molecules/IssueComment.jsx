@@ -1,5 +1,4 @@
 import React from 'react';
-import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Card from '@mui/joy/Card';
 import CardOverflow from '@mui/joy/CardOverflow';
@@ -9,6 +8,7 @@ import Box from '@mui/material/Box';
 
 // Components
 import UserAvatar from '../atoms/UserAvatar';
+import CodeBlock from '../atoms/CodeBlock';
 
 const IssueComment = ({ comment }) => {
   return (
@@ -46,28 +46,7 @@ const IssueComment = ({ comment }) => {
       </CardOverflow>
       {comment?.commentText?.split('```')?.map((text, i) => {
         if (i % 2 === 1) {
-          return (
-            <Box
-              component="div"
-              sx={{
-                display: 'block',
-                p: 1,
-                m: 1,
-                bgcolor: (theme) =>
-                  theme.palette.mode === 'dark' ? '#101010' : '#fff',
-                color: (theme) =>
-                  theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
-                border: '1px solid',
-                borderColor: (theme) =>
-                  theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
-                borderRadius: 2,
-                fontSize: '0.875rem',
-                fontWeight: '700',
-              }}
-            >
-              <code>{text}</code>
-            </Box>
-          );
+          return <CodeBlock text={text} />;
         } else {
           return <ListItemText primary={text} />;
         }
