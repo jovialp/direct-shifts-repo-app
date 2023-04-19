@@ -4,12 +4,13 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
 // Components
-import PullRequestHeader from '../../components/organisms/PullRequestHeader';
+import IssueHeader from '../../components/organisms/IssueHeader';
 import IssueCommentsList from '../../components/organisms/IssueCommentsList';
+import IssueComment from '../../components/molecules/IssueComment';
 
 // Services
-import getIssueDetailService from '../../services/pullRequest/getDetails';
-import getCommentListService from '../../services/pullRequest/getCommentList';
+import getIssueDetailService from '../../services/issue/getDetails';
+import getCommentListService from '../../services/issue/getCommentList';
 
 const IssueDetails = () => {
   const [issueDetails, setIssueDetails] = useState();
@@ -24,7 +25,7 @@ const IssueDetails = () => {
       number: issueNumber,
     });
 
-    setPullRequestDetails(details);
+    setIssueDetails(details);
     setIsLoading(false);
   };
 
@@ -58,7 +59,7 @@ const IssueDetails = () => {
   return (
     <Container fixed>
       <Grid container spacing={2}>
-        <PullRequestHeader
+        <IssueHeader
           pullRequestNumber={issueNumber}
           title={issueDetails?.title}
           status={issueDetails?.state}
@@ -70,6 +71,14 @@ const IssueDetails = () => {
         />
 
         <Grid item xs={12} md={8}>
+          <IssueComment
+            comment={{
+              userName: issueDetails?.user.login,
+              userAvatarUrl: issueDetails?.user.avatar_url,
+              commentText: issueDetails?.body,
+              updatedAt: issueDetails?.updated_at,
+            }}
+          />
           <IssueCommentsList comments={comments} />,
         </Grid>
       </Grid>

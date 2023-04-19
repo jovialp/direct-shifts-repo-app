@@ -1,3 +1,9 @@
 # direct-shifts-repo-app
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-tweg4z)
+[View on StackBlitz ⚡️](https://react-tweg4z.stackblitz.io)
+
+In the project directory, you can run:
+
+npm start
+Runs the app in the development mode.
+Open http://localhost:3000 to view it in the browser.
